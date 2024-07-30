@@ -10,25 +10,15 @@ class Solution {
     // Function to find floor of x
     // n: size of vector
     // x: element whose floor is to find
-    int findFloor(vector<long long> arr, long long n, long long x) {
-        int start = 0;
-        int end = n - 1;
-        int res = -1; // To track the floor value's index
-
-        while (start <= end) {
-            long long mid = start + (end - start) / 2;
-
-            if (arr[mid] <= x) {
-                res = mid; // Update result to the current mid
-                start = mid + 1; // Move right to find a larger value still <= x
-            } else {
-                end = mid - 1; // Move left to find a smaller value
-            }
+    int maxi = INT_MIN;
+    int findFloor(vector<long long> &v, long long n, long long x) {
+        for(int i=0;i<v.size();i++){
+            if(v[i]<=x) maxi = max(maxi,i);
         }
-        return res; // Return the index of the floor value or -1 if no floor exists
+        return maxi==INT_MIN?-1:maxi;
+        // Your code here
     }
 };
-
 
 
 //{ Driver Code Starts.
