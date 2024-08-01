@@ -5,56 +5,40 @@ using namespace std;
 
 // } Driver Code Ends
 
-
 class Solution {
   public:
     vector<int> spirallyTraverse(vector<vector<int> > &matrix) {
         // code here
-        
-        vector<int> ans;
-        
-        long long int n = matrix.size();
-        long long int m = matrix[0].size();
-        
-        long long int startingRow = 0;
-        long long int startingCol = 0;
-        long long int endingRow = n-1 ;
-        long long int endingCol = m-1;
-        
-        long long int count = 0;
-        long long int maxCount = (n*m) ;
-        
-        while(count < maxCount){
-            
-            for(int index=startingCol; count < maxCount && index <= endingCol ;index++){
-                ans.push_back(matrix[startingRow][index]);
-                count++;
+        int top = 0;
+        int left = 0;
+        int right = matrix[0].size()-1;
+        int bottom = matrix.size()-1;
+        vector<int>v;
+        while(left<=right && top<=bottom){
+            for(int i=left;i<=right;i++){
+                v.push_back(matrix[top][i]);
             }
-            startingRow++;
-            
-            for(int index=startingRow;  count < maxCount &&  index <= endingRow; index++){
-                ans.push_back(matrix[index][endingCol]);
-                count++;
+            top++;
+            for(int i=top;i<=bottom;i++){
+                v.push_back(matrix[i][right]);
             }
-            endingCol--;
-            
-            for(int index=endingCol;  count < maxCount &&  index>=startingCol; index--){
-                ans.push_back(matrix[endingRow][index]);
-                count++;
+            right--;
+            if(top<=bottom){
+                for(int i=right;i>=left;i--){
+                    v.push_back(matrix[bottom][i]);
+                }
+                bottom--;
             }
-            endingRow--;
-            
-            for(int index=endingRow;  count < maxCount &&  index>=startingRow;index--){
-                ans.push_back(matrix[index][startingCol]);
-                count++;
+            if(left<=right){
+                for(int i=bottom;i>=top;i--){
+                    v.push_back(matrix[i][left]);
+                }
+                left++;
             }
-            startingCol++;
         }
-        
-        return ans;
+        return v;
     }
 };
-
 
 
 //{ Driver Code Starts.
