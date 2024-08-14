@@ -5,36 +5,25 @@ using namespace std;
 
 // } Driver Code Ends
 
-#include <unordered_map>
-
-class Solution {
-public:
-    int lenOfLongSubarr(int A[], int N, int K) {
-        std::unordered_map<long long, int> sumMap;
-        long long sum = 0;
-        int maxlen = 0;
-
-        for (int i = 0; i < N; ++i) {
+class Solution{
+    public:
+    int lenOfLongSubarr(int A[],  int N, int k) 
+    { 
+        int sum = 0;
+        unordered_map<int,int>up;
+        int maxi = 0;
+        for(int i=0;i<N;i++){
             sum += A[i];
-
-            // If sum is equal to K, update maxlen
-            if (sum == K) {
-                maxlen = i + 1;
-            }
-
-            // If (sum - K) exists in the map, we found a subarray
-            if (sumMap.find(sum - K) != sumMap.end()) {
-                maxlen = std::max(maxlen, i - sumMap[sum - K]);
-            }
-
-            // Only add the current sum to the map if it doesn't exist
-            if (sumMap.find(sum) == sumMap.end()) {
-                sumMap[sum] = i;
+            if(sum==k) maxi = i+1;
+            if(up.find(sum)==up.end()) up[sum] = i;
+            if(up.find(sum-k)!=up.end()){
+                maxi = max(maxi,i-up[sum-k]);
             }
         }
-
-        return maxlen;
-    }
+        
+        return maxi;
+        // Complete the function
+    } 
 };
 
 
