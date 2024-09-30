@@ -93,25 +93,25 @@ struct Node {
 };
 */
 class Solution {
-  private:
-    void in1(Node* root,vector<int>&v){
-        if(!root) return;
-        in1(root->left,v);
-        v.push_back(root->data);
-        in1(root->right,v);
-    }
-    
+  void inorder(Node *root1,vector<int>&temp){
+      if(root1==NULL){
+          return;
+      }
+      inorder(root1->left,temp);
+      temp.push_back(root1->data);
+      inorder(root1->right,temp);
+  }
   public:
     // Function to return a list of integers denoting the node
     // values of both the BST in a sorted order.
     vector<int> merge(Node *root1, Node *root2) {
-        // Your code here
-        vector<int>v;
-        in1(root1,v);
-        in1(root2,v);
-        sort(v.begin(),v.end());
-        return v;
+        vector<int>temp;
+        inorder(root1,temp);
+        inorder(root2,temp);
+        sort(temp.begin(),temp.end());
+        return temp;
         
+        // Your code here
     }
 };
 
